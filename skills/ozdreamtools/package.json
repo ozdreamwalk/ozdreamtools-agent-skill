@@ -1,0 +1,10 @@
+{
+  "name": "ozdreamtools-skill",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@x402/evm": "2.19.0",
+    "@x402/fetch": "2.19.0",
+    "viem": "2.55.5"
+  }
+}
