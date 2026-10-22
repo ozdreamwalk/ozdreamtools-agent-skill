@@ -1,16 +1,10 @@
 ---
 name: ozdreamtools
 description: Pay-per-call checks for German law and websites over x402 (USDC on Base, no account, no API key). Imprint check (§ 5 DDG), invoice mandatory details (§ 14 UStG), BFSG accessibility quickcheck, public holidays per German state, statutory deadlines (§§ 187-193 BGB), cold outreach rules per country, IBAN and EU VAT number format, robots.txt linting (RFC 9309), llms.txt generation, agent-readiness score, product page purchasability. Use when an agent has to check a German imprint, invoice, deadline or holiday, or audit a website for AI agents and crawlers.
+compatibility: Requires bun and network access to api.ozdreamtools.de. Paid calls need X402_PRIVATE_KEY, the key of a dedicated, low-balance Base wallet holding USDC; without it the skill lists routes and shows prices but pays nothing.
 metadata:
-  openclaw:
-    emoji: "🧾"
-    homepage: https://api.ozdreamtools.de
-    requires:
-      bins: ["bun"]
-    envVars:
-      - name: X402_PRIVATE_KEY
-        required: false
-        description: Private key of a dedicated, low-balance Base wallet holding USDC. Only needed for paid calls. Without it the skill lists routes and shows prices but pays nothing.
+  homepage: https://api.ozdreamtools.de
+  openapi: https://api.ozdreamtools.de/openapi.json
 ---
 
 # OzDreamTools
@@ -32,7 +26,7 @@ Paid HTTP endpoints at `https://api.ozdreamtools.de`, operated by OzDreamWalk (G
    ```bash
    bun scripts/call.ts --catalog
    ```
-   The raw catalog is `GET https://api.ozdreamtools.de/api/catalog`. Do not rely on a route list in this file; the catalog is always current.
+   The raw catalog is `GET https://api.ozdreamtools.de/api/catalog`. The same routes as an OpenAPI 3.1 description: `GET https://api.ozdreamtools.de/openapi.json`. Do not rely on a route list in this file; the catalog is always current.
 2. **Build the request body** from the route's `input_schema` and `input_example`. Every route assesses only what you send. The service makes no outbound request of its own, so you fetch the page, robots.txt or invoice text yourself and pass it in.
 3. **Check the price without paying:**
    ```bash
